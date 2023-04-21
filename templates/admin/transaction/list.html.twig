@@ -1,0 +1,41 @@
+{% extends 'admin/layout/list.html.twig' %}
+{% block title %}Pénzügyi tranzakciók{% endblock %}
+
+{% block list_filter %}
+    {{ form_start(filterForm) }}
+    {{ form_errors(filterForm) }}
+    <div id="search">
+        <div class="row">
+            <div class="col-3 form-group input-group-sm">
+                {{ form_widget(filterForm.name, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-dark btn-sm">Keresés</button>
+            </div>
+        </div>
+    </div>
+    {{ form_end(filterForm, {'render_rest': false}) }}
+{% endblock %}
+
+{% block list_body %}
+    <table class="table table-responsive-sm table-striped">
+        <thead>
+        <tr>
+            <th{% if entities.isSorted('t.transactionId') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Tranzakció azonosító', 't.transactionId') }}</th>
+            <th{% if entities.isSorted('t.createdAt') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Időpont', 't.createdAt') }}</th>
+            <th{% if entities.isSorted('t.status') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Státusz', 't.status') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.transactionId }}</td>
+                <td>{{ entity.createdAt|date('Y-m-d') }}</td>
+                <td>{{ entity.status }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+

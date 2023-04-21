@@ -1,0 +1,64 @@
+{% extends 'admin/layout/list.html.twig' %}
+{% block title %}
+    {% if op == "ship" %}
+        Hajók
+    {% elseif op == "apartment" %}
+        Apartmanok
+    {% elseif op == "ebike" %}
+        Elektromos kerékpárok
+    {% endif %}
+{% endblock %}
+{% block list_actions %}
+    <div class="card-header-actions">
+        {% if app.request.locale != 'hu' %}<a class="card-header-action btn-setting" href="{{ path('admin_service_list', {'_locale': 'hu', 'op': op}) }}">[HU]</a>{% endif %}
+        {% if app.request.locale != 'en' %}<a class="card-header-action btn-setting" href="{{ path('admin_service_list', {'_locale': 'en', 'op': op}) }}">[EN]</a>{% endif %}
+        {% if app.request.locale != 'de' %}<a class="card-header-action btn-setting" href="{{ path('admin_service_list', {'_locale': 'de', 'op': op}) }}">[DE]</a>{% endif %}
+        <a class="card-header-action btn-setting" href="{{ path('admin_service_form', {'op': op}) }}">
+            <svg class="c-icon">
+                <use xlink:href="/assets/icons/sprites/free.svg#cil-plus"></use>
+            </svg></a>
+    </div>
+{% endblock %}
+
+{% block list_filter %}
+    {{ form_start(filterForm) }}
+    {{ form_errors(filterForm) }}
+    <div id="search">
+        <div class="row">
+            <div class="col-3 form-group input-group-sm">
+                {{ form_widget(filterForm.name, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-dark btn-sm">Keresés</button>
+            </div>
+        </div>
+
+    </div>
+    {{ form_end(filterForm, {'render_rest': false}) }}
+{% endblock %}
+
+{% block list_body %}
+    <table class="table table-responsive-sm table-striped">
+        <thead>
+        <tr>
+            <th{% if entities.isSorted('t.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Név', 't.name') }}</th>
+            <th{% if entities.isSorted('t.lead') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Rövid szöveges leírás', 't.lead') }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.lead }}</td>
+                <td>
+                    <a href="{{ path('admin_service_form', {'id': entity.id, 'op': op}) }}" class="btn btn-primary btn-sm">Részletek</a>
+                    <a href="{{ path('admin_service_remove', {'id': entity.id, 'op': op}) }}" class="btn btn-sm btn-danger" onclick="javascript:return confirm('Biztos, hogy törölni szeretné?')">Törlés</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+

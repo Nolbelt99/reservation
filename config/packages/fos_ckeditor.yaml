@@ -1,0 +1,14 @@
+fos_ck_editor:
+  input_sync: true
+  default_config: full_config
+  configs:
+    full_config:
+      language: hu
+      toolbar:
+        - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-','RemoveFormat', '-','PasteText','PasteFromWord','-','Undo','Redo', '-', 'Link', 'Unlink', '-', 'Image', 'Table', 'Iframe', 'Styles', 'Format', '-', 'Source'] }
+      stylesSet: ["my_styles"]
+      allowedContent: true
+#      extraPlugins: "templates"
+#      templates:    "my_templates"
+      contentsCss: "/assets/css/wysiwyg.css"
+#      format_tags: "p;h2;h3;h4;h5;pre;div"

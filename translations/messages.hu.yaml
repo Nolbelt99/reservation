@@ -1,0 +1,26 @@
+forms:
+  payment:
+    invoiceAddressName: Számlázási név
+    invoiceAddressZip: Számlázási irányítószám
+    invoiceAddressCountry: Számlázási ország
+    invoiceAddressCity: Számlázási város
+    invoiceAddressStreetAndOther: Számlázási utca, házszám
+    data: Tudomásul vettem és elfogadom az <a href="/hu/oldalak/magyar-aszf">Adatkezelési tájékoztatóban</a> foglaltakat
+    valid_data: Kijelentem, hogy az általam megadott adatok a valóságnak megfelelnek.
+    terms: Tudomásul vettem és elfogadom a <a href="/hu/oldalak/magyar-aszf">Felhasználási feltételeket</a>.
+
+  reservationItem:
+    startDate: Foglalás kezdete
+    endDate: Foglalás vége
+    withCaptain: Kapitánnyal?
+    licenceNumber: Vezetői engedély száma
+
+  profile:
+    email: E-mail cím
+    firstName: Vezetéknév
+    lastName: Keresztnév
+    phone: Telefonszám
+    newsletter: Hírlevél
+    birthDay: Születési idő
+
+introduction: Bemutatkozás

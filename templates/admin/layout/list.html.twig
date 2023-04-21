@@ -1,0 +1,27 @@
+{% extends 'admin/layout/base.html.twig' %}
+{% block main %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-accent-primary">
+                <div class="card-header">
+                    {% block title %}
+                    {% endblock %}
+                    {% block list_actions %}
+                    {% endblock %}
+                </div>
+                <div class="card-body">
+                    {% block list_filter %}
+                    {% endblock %}
+                    {% if entities|length %}
+                        {% block list_body %}
+                        {% endblock %}
+                        {{ knp_pagination_render(entities) }}
+                        {# {{ block('list_actions') }} ebből miért van kettő? -gyage #}
+                    {% else %}
+                        Nincs találat.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

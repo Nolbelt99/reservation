@@ -1,0 +1,27 @@
+{% extends 'admin/layout/base.html.twig' %}
+{% block main %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-accent-primary">
+                <div class="card-header">
+                    {% block title %}
+                    {% endblock %}
+                    {% block form_header %}
+                    {% endblock %}
+                </div>
+                {{ form_start(form) }}
+                <div class="card-body">
+                    {{ form_errors(form) }}
+                    {% block form_fields %}
+                    {% endblock %}
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-primary" type="submit" id="form_submit"> Mentés</button>
+                    {% block form_footer %}
+                    {% endblock %}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

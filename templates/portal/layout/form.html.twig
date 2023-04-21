@@ -1,0 +1,27 @@
+{% extends 'portal/layout/base.html.twig' %}
+{% block body %}
+<div id="form">
+  <div class="container">
+    <div class="left p-5">
+      {% block title %}
+      {% endblock %}
+      {% block form_header %}
+      {% endblock %}
+      {{ form_start(form) }}
+      {{ form_errors(form) }}
+      {% block form_fields %}
+      {% endblock %}
+      <div class="row mt-4">
+        <div class="col text-right">
+          {% block form_footer %}
+          {% endblock %}
+          <button class="btn btn-success rounded" type="submit" id="form_submit"> Mentés</button>
+        </div>
+      </div>
+      {{ form_end(form) }}
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

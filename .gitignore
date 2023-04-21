@@ -1,0 +1,23 @@
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+/components/
+/public/assets/
+###< symfony/framework-bundle ###
+node_modules
+/composer.phar
+.idea
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
+
+src/SzamlaAgent/Files
+/public/upload/

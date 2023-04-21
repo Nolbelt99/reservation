@@ -1,0 +1,45 @@
+{% extends 'admin/layout/form.html.twig' %}
+{% block title %}
+    {% if entity is defined and entity.id %}
+        {{ entity.title }}
+    {% else %}
+        Új oldal
+    {% endif %}
+{% endblock %}
+{% block form_header %}
+    <div class="card-header-actions">
+        <a class="card-header-action btn-setting" href="{{ path('admin_blog_form') }}">
+            <svg class="c-icon">
+                <use xlink:href="/assets/icons/sprites/free.svg#cil-plus"></use>
+            </svg></a>
+    </div>
+{% endblock %}
+{% block form_footer %}
+    <a class="btn btn-light btn-sm" href="{{ path('admin_blog_list') }}">Vissza</a>
+{% endblock %}
+{% block form_fields %}
+    <div class="form-group row">
+        {{ form_label(form.title, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+           {{ form_widget(form.title) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.lead, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.lead) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.body, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.body) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.publishedAt, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.publishedAt) }}
+        </div>
+    </div>
+{% endblock %}

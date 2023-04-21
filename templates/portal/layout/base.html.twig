@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>{% block title %}Reservation{% endblock %}</title>
+  <link rel="icon" href="{{ asset('assets/favicon.png') }}">
+
+  {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+  {% block stylesheets %}
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Rubik">
+    {{ encore_entry_link_tags('app-portal') }}
+  {% endblock %}
+
+  {% block javascripts %}
+    {{ encore_entry_script_tags('app-portal') }}
+  {% endblock %}
+<body class="">
+<div id="page">
+  {{ include('/portal/layout/_menu.html.twig') }}
+  {% for label, messages in app.flashes %}
+    {% for message in messages %}
+      <span class="alert alert-warning d-block m-0">
+        <span class="d-block">
+          <span class="message">{{ message }}</span>
+        </span>
+      </span>
+    {% endfor %}
+  {% endfor %}
+  {% block body %}
+  {% endblock %}
+  {{ include('/portal/layout/_footer.html.twig') }}
+</div>
+</body>
+</html>

@@ -1,0 +1,228 @@
+{% extends 'admin/layout/form.html.twig' %}
+{% block title %}
+    {% if entity is defined and entity.id %}
+        {{ entity.name }}
+    {% elseif op == "ship" %}
+        Új hajó
+    {% elseif op == "apartment" %}
+        Új apartman
+    {% elseif op == "ebike" %}
+        Új elektromos kerékpár
+    {% endif %}
+{% endblock %}
+{% block form_header %}
+    <div class="card-header-actions">
+        <a class="card-header-action btn-setting" href="{{ path('admin_service_form', {'op': op}) }}">
+            <svg class="c-icon">
+                <use xlink:href="/assets/icons/sprites/free.svg#cil-plus"></use>
+            </svg></a>
+    </div>
+{% endblock %}
+{% block form_footer %}
+    <a class="btn btn-light btn-sm" href="{{ path('admin_service_list', {'op': op}) }}">Vissza</a>
+{% endblock %}
+{% block form_fields %}
+    <div class="form-group row">
+        {{ form_label(form.name, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+           {{ form_widget(form.name) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.slug, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.slug) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.lead, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.lead) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.body, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.body) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.coverImage, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.coverImage) }}
+        </div>
+    </div>
+    {% if entity.coverImage %}
+        <img src="/upload/{{ entity.coverImage }}" width="20%"/>
+    {% endif %}
+    <div class="form-group row">
+        {{ form_label(form.coverImageCollection, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.coverImageCollection) }}
+        </div>
+    </div>
+    {% if entity.coverImageCollection %}
+        <img src="/upload/{{ entity.coverImageCollection }}" width="20%"/>
+    {% endif %}
+    <div class="form-group row">
+        {{ form_label(form.reservationType, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.reservationType) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.companyName, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.companyName) }}
+        </div>
+    </div>
+
+
+    {% if op == 'apartment' %}
+        <div class="form-group row">
+            {{ form_label(form.beds, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.beds) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.extraBeds, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.extraBeds) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.price, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.price) }}
+            </div>
+        </div>
+    {% endif %}
+
+
+    {% if op == 'ship' %}
+        <div class="form-group row">
+            {{ form_label(form.assurance, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.assurance) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.cleaningCharge, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.cleaningCharge) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.captainType, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.captainType) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.captainPrice, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.captainPrice) }}
+            </div>
+        </div>
+    {% endif %}
+
+
+
+    {% if op == 'ebike' %}
+        <div class="form-group row">
+            {{ form_label(form.halfDayPrice, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.halfDayPrice) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.fullDayPrice, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+                {{ form_widget(form.fullDayPrice) }}
+            </div>
+        </div>
+
+    {% endif %}
+
+    
+    <div class="form-group row">
+        {{ form_label(form.avaibleSameTime, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.avaibleSameTime) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.minDay, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.minDay) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.relatedServices, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+           {{ form_widget(form.relatedServices) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.conditionServices, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+           {{ form_widget(form.conditionServices) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.giftService, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+           {{ form_widget(form.giftService) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.giftImage, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.giftImage) }}
+        </div>
+    </div>
+    {% if entity.giftImage %}
+        <img src="/upload/{{ entity.giftImage }}" width="20%"/>
+    {% endif %}
+    <div class="form-group row">
+        {{ form_label(form.minGiftDay, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.minGiftDay) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.giftText, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.giftText) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.galleryImages, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.galleryImages) }}
+        </div>
+    </div>
+    {% if entity.galleryImages %}
+        <div class="row">
+            {% for image in entity.galleryImages %}
+                <div class="col-md-6">
+                    <img src="/upload/{{ image.path }}" width="20%"/>
+                    <a class="btn btn-sm btn-danger" href="{{ path('admin_gallery_remove', {'id': image.id}) }}" >Törlés</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('input[type="file"]').on('change', function(event) {
+            var inputFile = event.currentTarget;
+            $(inputFile).parent()
+                .find('.custom-file-label')
+                .html(inputFile.files[0].name);
+        });
+    </script>
+{% endblock %}

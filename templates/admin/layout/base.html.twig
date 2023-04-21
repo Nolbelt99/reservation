@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SISKE - adminisztrációs rendszer{% endblock %}</title>
+    {% include "admin/layout/_head.html.twig" %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app-admin') }}
+    {% endblock %}
+</head>
+<body class="c-app">
+<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+    <div class="c-sidebar-brand d-lg-down-none">
+        SISKE
+    </div>
+    <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-item "><a class="c-sidebar-nav-link" href="{{ path('admin_dashboard') }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-speedometer"></use>
+                </svg>
+                Kezdőlap</a></li>
+        <hr class="my-4 mx-0"/>
+        <li class="c-sidebar-nav-title">Szolgáltatások</li>
+        <li class="c-sidebar-nav-group "><a class="c-sidebar-nav-link" href="{{ path('admin_service_list', {'_locale': 'hu', 'op': 'ship'}) }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-movie"></use>
+                </svg>
+                Hajók</a></li>
+        <li class="c-sidebar-nav-group "><a class="c-sidebar-nav-link" href="{{ path('admin_service_list', {'_locale': 'hu', 'op': 'apartment'}) }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-movie"></use>
+                </svg>
+                Apartmanok</a></li>
+        <li class="c-sidebar-nav-group "><a class="c-sidebar-nav-link" href="{{ path('admin_service_list', {'_locale': 'hu', 'op': 'ebike'}) }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-movie"></use>
+                </svg>
+                Kerékpárok</a></li>
+        <li class="c-sidebar-nav-title">Foglalások</li>
+        <li class="c-sidebar-nav-group "><a class="c-sidebar-nav-link" href="{{ path('admin_reservation_list') }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-movie"></use>
+                </svg>
+                Felhasználói foglalások</a></li>
+        <li class="c-sidebar-nav-group "><a class="c-sidebar-nav-link" href="{{ path('admin_transactions') }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-movie"></use>
+                </svg>
+                Pénzügyi tranzakciók</a></li>
+        <li class="c-sidebar-nav-group "><a class="c-sidebar-nav-link" href="{{ path('admin_reservation_calendar') }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-movie"></use>
+                </svg>
+                Foglaltsági naptár</a></li>
+        <li class="c-sidebar-nav-group "><a class="c-sidebar-nav-link" href="{{ path('admin_reservation_list', {'op': 'manual'}) }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-movie"></use>
+                </svg>
+                Manuális foglalás</a></li>
+        <li class="c-sidebar-nav-title">Média</li>
+        <li class="c-sidebar-nav-group "><a class="c-sidebar-nav-link" href="{{ path('admin_blog_list') }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-movie"></use>
+                </svg>
+                Blog</a></li>
+        <li class="c-sidebar-nav-group "><a class="c-sidebar-nav-link" href="{{ path('admin_page_list') }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-movie"></use>
+                </svg>
+                Oldalak</a></li>
+        <li class="c-sidebar-nav-group "><a class="c-sidebar-nav-link" href="{{ path('admin_contact') }}">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="/assets/icons/sprites/free.svg#cil-movie"></use>
+                </svg>
+                Kapcsolat</a></li>
+    </ul>
+    <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent"
+            data-class="c-sidebar-minimized"></button>
+</div>
+<div class="c-wrapper c-fixed-components">
+    <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+        <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar"
+                data-class="c-sidebar-show">
+            <svg class="c-icon c-icon-lg">
+                <use xlink:href="/assets/icons/sprites/free.svg#cil-menu"></use>
+            </svg>
+        </button>
+        <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar"
+                data-class="c-sidebar-lg-show" responsive="true">
+            <svg class="c-icon c-icon-lg">
+                <use xlink:href="/assets/icons/sprites/free.svg#cil-menu"></use>
+            </svg>
+        </button>
+        <ul class="c-header-nav d-md-down-none">
+        </ul>
+        <ul class="c-header-nav ml-auto mr-4">
+            <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#"
+                                                      role="button" aria-haspopup="true" aria-expanded="false">
+                    <svg class="c-icon mr-2">
+                        <use xlink:href="/assets/icons/sprites/free.svg#cil-user"></use>
+                    </svg>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right pt-0">
+                    <div class="dropdown-header bg-light py-2"><strong>Profil</strong></div>
+                    <a class="dropdown-item" href="{{ path('app_logout') }}">
+                        <svg class="c-icon mr-2">
+                            <use xlink:href="/assets/icons/sprites/free.svg#cil-account-logout"></use>
+                        </svg>
+                        Kijelentkezés</a>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <div class="c-body">
+        <main class="c-main">
+            <div class="container-fluid">
+                <div class="fade-in">
+                    {% for label, messages in app.flashes %}
+                        {% for message in messages %}
+                            {% if label == 'notice' %}
+                                {% set type = 'success' %}
+                            {% elseif label == 'error' %}
+                                {% set type = 'danger' %}
+                            {% else %}
+                                {% set type = 'info' %}
+                            {% endif %}
+                            <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">{{ message }}
+                                <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span
+                                            aria-hidden="true">×</span></button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% block main %}{% endblock %}
+                </div>
+            </div>
+        </main>
+        <footer class="c-footer">
+            <div>&nbsp;</div>
+            <div class="ml-auto">2023. SISKE</div>
+        </footer>
+    </div>
+</div>
+</body>
+{% block javascripts %}
+    {{ encore_entry_script_tags('app-admin') }}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+{% endblock %}
+</html>

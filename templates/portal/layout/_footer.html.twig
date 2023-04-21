@@ -1,0 +1,16 @@
+<footer class="p-5">
+  <div class="row">
+    <a class="mx-1" href="{{ path('portal_page_locale', {_locale: 'hu'}) }}">HU</a>
+    <a class="mx-1" href="{{ path('portal_page_locale', {_locale: 'en'}) }}">EN</a>
+    <a class="mx-1" href="{{ path('portal_page_locale', {_locale: 'de'}) }}">DE</a>
+    {% if app.request.get('_locale') != "" %}
+      {% set _locale = app.request.get('_locale') %}
+    {% else %}
+      {% set _locale = 'hu' %}
+    {% endif %}
+  </div>
+  <div class="row">
+      <a href="{{ path('portal_page_show', {slug: 'magyar-aszf', _locale: _locale}) }}">Általános szerződésifeltételek</a>
+      <a href="#"> Adatvédelmi szabályzat</a>
+  </div>
+</footer>

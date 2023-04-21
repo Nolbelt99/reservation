@@ -1,0 +1,40 @@
+{% extends 'portal/layout/base.html.twig' %}
+{% block body %}
+  <div id="registration">
+    <div class="container">
+      <div class="left p-5">
+        <h3 class="pt-0 mt-0">
+          Bejelentkezés
+        </h3>
+        <form class="form" method="post">
+
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <label>
+              E-mail cím
+            </label>
+            <input class="form-control" type="email" name="_username" id="username" placeholder="Email"
+                   value="{{ last_username }}" required autofocus>
+          </div>
+          <div class="col-12 col-lg-6">
+            <label>
+              Jelszó
+            </label>
+            <input type="password" name="_password" id="password" class="form-control prepend" required/>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-12 text-right">
+            <button class="btn btn-success rounded" type="submit">Bejelentkezés</button>
+
+          </div>
+        </div>
+          {% if error %}
+            <p class="text-danger text-center mt-3"><strong>Sikertelen bejelentkezés</strong></p>
+          {% endif %}
+
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

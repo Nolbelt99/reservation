@@ -1,0 +1,33 @@
+<na>
+  <a href="/"></a>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="{{ path('portal_page_default') }}" class="mx-2"> {{ 'introduction'|trans }}</a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ path('portal_page_service_list', {serviceType: 'apartment'}) }}" class="mx-2"> Apartmanok </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ path('portal_page_service_list', {serviceType: 'ship'}) }}" class="mx-2"> Hajó bérlés </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ path('portal_page_contact') }}" class="mx-2"> Kapcsolat </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ path('portal_page_booking') }}" class="mx-2"> Foglalás </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ path('portal_page_blog_list') }}" class="mx-2"> Blog </a>
+      </li>
+    </ul>
+  </div>
+  <div>
+    {% if is_granted('ROLE_USER') %}
+      <a href="{{ path('portal_page_profile_form', {'id': app.user.id}) }}" class="ml-2">Profil</a>
+      <a href="{{ path('app_logout') }}" class="ml-2">Kijelentkezés</a>
+    {% else %}
+      <a href="{{ path('portal_security_register') }}" class="ml-2">Regisztráció</i></a>
+      <a href="{{ path('portal_security_login') }}" class="ml-2">Bejelentkezés</i></a>
+    {% endif %}
+  </div>
+</nav>

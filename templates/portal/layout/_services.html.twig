@@ -1,0 +1,110 @@
+{% for entity in entities %}
+  <h3 class="pt-0 mt-0">
+    <a
+      href="{{ path('portal_page_service_show', {slug: entity.slug, serviceType: entity.serviceType|lower}) }}">{{ entity.name }}</a>
+  </h3>
+  <div class="row">
+    <div class="col-12 col-lg-7">
+      <a
+        href="{{ path('portal_page_service_show', {slug: entity.slug, serviceType: entity.serviceType|lower}) }}">
+        <img src="{{ asset('upload/' ~ entity.coverImage) }}" alt="{{ entity.name }}" class="w-100">
+      </a>
+    </div>
+    <div class="col-12 col-lg-5">
+      <h4 class="lead mt-2 mb-4 text-uppercase">{{ entity.lead }}</h4>
+      <div class="row">
+        {% if entity.serviceType == 'SHIP' %}
+          <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+            {{ entity.price }}
+            </span>
+            <br/>
+            <small>Napi bérleti díj</small>
+          </div>
+          <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+            {{ entity.assurance }}
+              </span>
+            <br/>
+            <small>Kaució</small>
+          </div>
+          <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+              {{ entity.cleaningCharge }}
+            </span>
+            <br/>
+            <small>Takarítási díj</small>
+          </div>
+          <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+              {{ entity.captainPrice }}
+            </span>
+            <br/>
+            <small>Kapitány napi díja</small>
+          </div>
+          <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+              {% if entity.captainType == 'MANDATORY' %}
+              Igen
+              {% else %}
+              Nem
+              {% endif %}
+            </span>
+            <br/>
+            <small>Kapitány kötelező</small>
+          </div>
+        {% elseif entity.serviceType == 'APARTMENT' %}
+          <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+             {{ entity.price }}
+            </span>
+            <br/>
+            <small>Napi bérleti díj</small>
+          </div>
+          <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+             {{ entity.beds }}
+            </span>
+            <br/>
+            <small>Ágyak száma</small>
+          </div>
+          <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+            {{ entity.extraBeds }}
+            </span>
+            <br/>
+            <small>Plusz ágyak száma</small>
+          </div>
+        {% elseif entity.serviceType == 'EBIKE' %}
+          <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+             {{ entity.fullDayPrice }}
+            </span>
+            <br/>
+            <small>Napi ár</small>
+          </div>
+          <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+            {{ entity.halfDayPrice }}
+            </span>
+            <br/>
+            <small>Félnapi ár</small>
+          </div>
+        {% endif %}
+        <div class="col mb-2 text-nowrap">
+            <span class="font-weight-bold h6">
+            {{ entity.minDay }} <small>nap</small>
+            </span>
+          <br/>
+          <small>Min. bérelhető</small>
+        </div>
+      </div>
+      <div class="mt-4">
+        <a class="btn btn-success  rounded"
+            href="{{ path('portal_page_service_show', {slug: entity.slug, serviceType: entity.serviceType|lower}) }}">
+          Foglalás
+        </a>
+      </div>
+    </div>
+  </div>
+{% endfor %}

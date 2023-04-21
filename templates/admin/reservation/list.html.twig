@@ -1,0 +1,70 @@
+{% extends 'admin/layout/list.html.twig' %}
+{% block title %}Foglalások{% endblock %}
+{% block list_actions %}
+    <div class="card-header-actions">
+        {% if op is not null %}
+            <a class="btn btn-success btn-sm" href="{{ path('admin_reservation_form') }}">Új manuális foglalás</a>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block list_filter %}
+    {{ form_start(filterForm) }}
+    {{ form_errors(filterForm) }}
+    <div id="search">
+        <div class="row">
+            <div class="col-3 form-group input-group-sm">
+                {{ form_widget(filterForm.userEmail, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-dark btn-sm">Keresés</button>
+            </div>
+        </div>
+
+    </div>
+    {{ form_end(filterForm, {'render_rest': false}) }}
+{% endblock %}
+
+{% block list_body %}
+    <table class="table table-responsive-sm table-striped">
+        <thead>
+        <tr>
+            <th{% if entities.isSorted('r.reservationNumber') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Foglalás azonosító', 'r.reservationNumber') }}</th>
+            <th{% if entities.isSorted(['user.firstName', 'user.lastName']) %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Felhasználó név', ['user.firstName', 'user.lastName']) }}</th>
+            <th{% if entities.isSorted('user.email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Felhasználó email', 'user.email') }}</th>
+            <th{% if entities.isSorted('r.createdAt') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Foglalás időpontja', 'r.createdAt') }}</th>
+            <th{% if entities.isSorted('r.reservationStatus') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Foglalás státusza', 'r.reservationStatus') }}</th>
+            <th{% if entities.isSorted('r.sumPrice') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Foglalás összértéke', 'r.sumPrice') }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.reservationNumber }}</td>
+                <td>{{ entity.user.firstName }} {{ entity.user.lastName }}</td>
+                <td>{{ entity.user.email }}</td>
+                <td>{{ entity.createdAt|date('Y-m-d') }}</td>
+                <td>
+                    {% if entity.reservationStatus == "UNDER_RESERVATION" %}
+                        Foglalás alatt
+                    {% elseif entity.reservationStatus == "WAITING_FOR_PAYMENT" %}
+                        Fizetésre vár
+                    {% elseif entity.reservationStatus == "PAID_RESERVATION" %}
+                        Fizetett foglalás
+                    {% elseif entity.reservationStatus == "DELETED" %}
+                        Törölt
+                    {% elseif entity.reservationStatus == "MANUAL_RESERVAITON" %}
+                        Manuálisan foglalva
+                    {% endif %}
+                </td>
+                <td>{{ entity.sumPrice }} Ft</td>
+                <td>
+                    <a href="{{ path('admin_reservation_form', {'id': entity.id}) }}" class="btn btn-primary btn-sm">Részletek</a>
+                    <a href="{{ path('admin_reservation_remove', {'id': entity.id}) }}" class="btn btn-sm btn-danger" onclick="javascript:return confirm('Biztos, hogy törölni szeretné?')">Törlés</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

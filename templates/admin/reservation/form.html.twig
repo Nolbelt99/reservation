@@ -1,0 +1,142 @@
+{% extends 'admin/layout/form.html.twig' %}
+{% block title %}
+    {% if entity is defined and entity.id %}
+        {{ entity.id }}
+    {% else%}
+        Új foglalás
+    {% endif %}
+{% endblock %}
+{% block form_header %}
+    <div class="card-header-actions">
+        {% if entity is defined and entity.id %}
+            <a href="{{ path('admin_send_email', {'id': entity.id}) }}" class="btn btn-primary btn-sm">E-mail küldés</a>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block form_footer %}
+    <a class="btn btn-light btn-sm" href="{{ path('admin_reservation_list') }}">Vissza</a>
+{% endblock %}
+{% block form_fields %}
+    {% form_theme form
+        'admin/layout/_jquery.collection.html.twig'
+        'admin/reservation/_reservationItemsCollection.html.twig' %}
+    {% if entity is defined and entity.id %}
+        <div class="form-group row">
+            {{ form_label(form.reservationNumber, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+            {{ form_widget(form.reservationNumber) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.locale, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+            {{ form_widget(form.locale) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class='col-md-3 col-form-label'>Felhasználó neve:</p>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" disabled="true" class="form-control" value="{{ entity.user.firstName  ~ ' ' ~ entity.user.lastName }}">
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class='col-md-3 col-form-label'>Felhasználó Email cím:</p>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" disabled="true" class="form-control" value={{ entity.user.email }}>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class='col-md-3 col-form-label'>Felhasználó Telefonszám:</p>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" disabled="true" class="form-control" value={{ entity.user.phone }}>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class='col-md-3 col-form-label'>Számlázási név:</p>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" disabled="true" class="form-control" value={{ entity.user.invoiceAddressName }}>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class='col-md-3 col-form-label'>Számlázási Ország:</p>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" disabled="true" class="form-control" value={{ entity.user.invoiceAddressCountry }}>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class='col-md-3 col-form-label'>Számlázási Város:</p>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" disabled="true" class="form-control" value={{ entity.user.invoiceAddressCity }}>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class='col-md-3 col-form-label'>Számlázási Irányítószám:</p>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" disabled="true" class="form-control" value={{ entity.user.invoiceAddressZip }}>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <p class='col-md-3 col-form-label'>Számlázási Közterület:</p>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" disabled="true" class="form-control" value={{ entity.user.invoiceAddressStreetAndOther }}>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.sumPrice, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+            {{ form_widget(form.sumPrice) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.createdAt, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+            {{ form_widget(form.createdAt) }}
+            </div>
+        </div>
+
+
+
+        <div class="form-group row">
+            {{ form_label(form.reservationStatus, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+            {{ form_widget(form.reservationStatus) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.reservationItems, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+            {{ form_widget(form.reservationItems) }}
+            </div>
+        </div>
+
+    {% else %}
+        <div class="form-group row">
+            {{ form_label(form.user, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+            {{ form_widget(form.user) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form_label(form.reservationItems, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+            <div class="col-md-6">
+            {{ form_widget(form.reservationItems) }}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

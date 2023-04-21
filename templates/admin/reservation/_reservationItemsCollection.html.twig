@@ -1,0 +1,58 @@
+{% block ReservationItemType_label %}
+{% endblock %}
+{% block ReservationItemType_widget %}
+    <div class="row">
+        <div class="col-6">
+            {{ form_label(form.service, null, {'label_attr': {'class': 'col-form-label'}}) }}
+            {{ form_widget(form.service, {'attr': {'class': 'form-control h6 mt-0'}}) }}
+        </div>
+        <div class="col-6">
+            {% if form.vars['value'].id is defined and form.vars['value'].id is not null %}
+                <a href="{{ path('admin_reservation_remove_item', {'id': form.vars['value'].id}) }}" class="btn btn-sm btn-danger">Törlés</a>
+            {% else %}
+                <a href="#" class="collection-remove btn btn-sm btn-danger mt-1">Törlés</a>
+            {% endif %}
+        </div>
+        <div class="col-6">
+            {{ form_label(form.startDate, null, {'label_attr': {'class': 'col-form-label'}}) }}
+            {{ form_widget(form.startDate, {'attr': {'class': 'form-control h6 mt-0'}}) }}
+        </div>
+        <div class="col-6">
+            {{ form_label(form.endDate, null, {'label_attr': {'class': 'col-form-label'}}) }}
+            {{ form_widget(form.endDate, {'attr': {'class': 'form-control h6 mt-0'}}) }}
+        </div>
+        <div class="col-6">
+            {{ form_label(form.reservationPrice, null, {'label_attr': {'class': 'col-form-label'}}) }}
+            {{ form_widget(form.reservationPrice, {'attr': {'class': 'form-control h6 mt-0'}}) }}
+        </div>
+        <div class="col-6">
+            {{ form_label(form.reservationPaidSuccesfully, null, {'label_attr': {'class': 'col-form-label'}}) }}
+            {{ form_widget(form.reservationPaidSuccesfully, {'attr': {'class': 'form-control h6 mt-0'}}) }}
+        </div>
+
+        {% if form.vars['value'].id is defined and form.vars['value'].id is not null and form.vars['value'].service.serviceType == "SHIP" %}
+            <div class="col-6">
+                {{ form_label(form.paidAssurance, null, {'label_attr': {'class': 'col-form-label'}}) }}
+                {{ form_widget(form.paidAssurance, {'attr': {'class': 'form-control h6 mt-0'}}) }}
+            </div>
+            <div class="col-6">
+                {{ form_label(form.assurancePaidSuccesfully, null, {'label_attr': {'class': 'col-form-label'}}) }}
+                {{ form_widget(form.assurancePaidSuccesfully, {'attr': {'class': 'form-control h6 mt-0'}}) }}
+            </div>
+            <div class="col-6">
+                {{ form_label(form.licenceNumber, null, {'label_attr': {'class': 'col-form-label'}}) }}
+                {{ form_widget(form.licenceNumber, {'attr': {'class': 'form-control h6 mt-0'}}) }}
+            </div>
+            <div class="col-6">
+                {{ form_label(form.withCaptain, null, {'label_attr': {'class': 'col-form-label'}}) }}
+                {{ form_widget(form.withCaptain, {'attr': {'class': 'form-control h6 mt-0'}}) }}
+            </div>
+        {% elseif form.vars['value'].apartmentGuests.values is defined and form.vars['value'].apartmentGuests.values is not empty%}
+            <div class="col-6">
+                <a href="{{ path('admin_reservation_show_guests', {'id': form.vars['value'].id}) }}" class="btn btn-sm btn-primary mt-3">Vendégek</a>
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}
+

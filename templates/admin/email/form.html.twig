@@ -1,0 +1,23 @@
+{% extends 'admin/layout/form.html.twig' %}
+{% block title %} Új email {% endblock %}
+{% block form_header %}
+    <div class="card-header-actions">
+    </div>
+{% endblock %}
+{% block form_footer %}
+    <a class="btn btn-light btn-sm" href="{{ path('admin_reservation_form', {'id': entity.id}) }}">Vissza</a>
+{% endblock %}
+{% block form_fields %}
+    <div class="form-group row">
+        {{ form_label(form.subject, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+           {{ form_widget(form.subject) }}
+        </div>
+    </div>
+    <div class="form-group row">
+        {{ form_label(form.body, null, {'label_attr': {'class': 'col-md-3 col-form-label'}}) }}
+        <div class="col-md-6">
+            {{ form_widget(form.body) }}
+        </div>
+    </div>
+{% endblock %}
